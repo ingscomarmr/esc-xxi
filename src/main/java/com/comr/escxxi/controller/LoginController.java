@@ -18,17 +18,23 @@ public class LoginController {
 	private static Log LOG =  LogFactory.getLog(LoginController.class);		
 	
 	@GetMapping("/login")
-	public String showFormLogin(@RequestParam(name="error", defaultValue="",required=false) String error, Model model) {
+	public String showFormLogin(Model model,
+			@RequestParam(name="error", required=false) String error, 
+			@RequestParam(name="logout", required=false) String logout) {
+		
 		model.addAttribute("userCredential", new UserCredential());
 		model.addAttribute("error", error);
+		model.addAttribute("logout", logout);
+		
 		LOG.info("showFormLogin -> " + ViewNames.HomeGeneral.LOGIN);
 		return ViewNames.HomeGeneral.LOGIN;
 	}
 	
 	@PostMapping("/logincheck")
 	public String loginCheck(@ModelAttribute(name="userCredential") UserCredential userCredential) {
-		if(userCredential.getUserName().equals("") &&
-				userCredential.getPassword().equals("user")){
+		
+		if(userCredential.getUserName().equals("admin@admin.com") &&
+				userCredential.getPassword().equals("admin")){
 			
 			LOG.info("loginCheck -> " + ViewNames.Teacher.HOME);
 			
@@ -36,6 +42,6 @@ public class LoginController {
 		}
 		
 		LOG.info("loginCheck -> " + ViewNames.HomeGeneral.LOGIN + "?error");
-		return ViewNames.HomeGeneral.LOGIN + "?error";
+		return "redirect:/" + ViewNames.HomeGeneral.LOGIN + "?error";
 	}
 }
