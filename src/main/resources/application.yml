@@ -5,7 +5,7 @@ banner:
 #para conecar con postgresql  
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/sisescolar 
+    url: jdbc:postgresql://localhost:5432/sisescolar
     username: u_sisescolar
     password: comr040488
   jpa:    
