@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"/>
-<title>HOME</title>
-</head>
-<body>
-	<H1>THIS A HOME OF APPLICATION</H1>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page">
+    <head>
+        <title th:fragment="title_page">Home</title>
+    </head>
+    <body>
+        <div th:fragment="content">
+            my page content
+        </div>
+    </body>
 </html>

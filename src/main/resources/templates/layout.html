@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="page">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title th:include="this :: title_page">Layout</title>
+    </head>
+    <body>
+        layout page
+        <div th:include="this :: content"></div>
+        layout footer
+    </body>
+</html>
