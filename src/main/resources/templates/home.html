@@ -2,24 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
 <head>
-<title th:fragment="title_page">Home</title>
+<title th:fragment="title_page" th:text="#{home.page.title}">Home</title>
 </head>
 <body>
 
-	<!-- TO MENU PAGE -->
+
+	<!-- ######## TO MENU PAGE BEGIN ######## -->
 	<div id="siderbar-containt-menu" th:fragment="menu_content">
 		<li class="mt"><a class="active" href="index.html"> <i
-				class="fa fa-home"></i> <span>Home</span>
+				class="fa fa-home"></i> <span th:text="#{home.menu.home}">Home</span>
 		</a></li>
 
-		<li class="mt"><a href="#"> <i class="fa fa-users"></i> <span>Noticias</span>
+		<li class="mt"><a href="#" th:href="@{/registro}"> <i class="fa fa-users"></i> <span th:text="#{home.menu.registro}">Registro</span>
 		</a></li>
 
-		<li class="mt"><a href="#"> <i class="fa fa-book"></i> <span>Login</span>
+		<li class="mt"><a href="#" th:href="@{/login}"> <i class="fa fa-book"></i> <span th:text="#{home.menu.login}">Login</span>
 		</a></li>
 	</div>
-
-	<!-- TO CONTENT PAGE -->
+	<!-- ######## TO MENU PAGE END ######## -->
+	
+	
+	<!-- $$$$$$$$$$$$$$$$ TO CONTENT PAGE BEGIN $$$$$$$$$$$$$$$$ -->
 	<section class="wrapper" th:fragment="content">
 		<div class="row">
 			<div class="col-lg-9 main-chart">
@@ -175,10 +178,9 @@
 			<!-- **********************************************************************************************************************************************************
       RIGHT SIDEBAR CONTENT
       *********************************************************************************************************************************************************** -->
-
 			<div class="col-lg-3 ds">
 				<!--COMPLETED ACTIONS DONUTS CHART-->
-				<h3>Noticias</h3>
+				<h3 th:text="#{home.title.noticias}">Noticias</h3>
 
 				<!-- First Action -->
 				<div class="desc">
@@ -206,9 +208,17 @@
 						</p>
 					</div>
 				</div>
+				<!-- Mas Action -->
+				<div class="desc">					
+					<div class="details">
+						<p>							
+							<br /> <a href="#">M&aacute;s noticias...</a>
+						</p>
+					</div>
+				</div>
 
 				<!-- USERS ONLINE SECTION -->
-				<h3>Cursos</h3>
+				<h3 th:text="#{home.title.cursos}">Cursos</h3>
 				<!-- First Member -->
 				<div class="desc">
 					<div class="thumb">
@@ -248,7 +258,16 @@
 						</p>
 					</div>
 				</div>
-				<h3>Calendario</h3>
+				<!-- mas Member -->
+				<div class="desc">					
+					<div class="details">
+						<p>
+							<a href="#" th:text="#{home.cursos.mas}">mas</a>							
+						</p>
+					</div>
+				</div>
+				
+				<h3 th:text="#{home.title.calendario}">Calendario</h3>
 				<!-- CALENDAR-->
 				<div id="calendar" class="mb">
 					<div class="panel green-panel no-margin">
@@ -270,5 +289,7 @@
 		</div>
 		<!--/row -->
 	</section>
+	<!-- $$$$$$$$$$$$$$$$ TO CONTENT PAGE END $$$$$$$$$$$$$$$$ -->
+
 </body>
 </html>
