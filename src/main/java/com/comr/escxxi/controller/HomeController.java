@@ -37,7 +37,7 @@ public class HomeController {
 	@GetMapping("/home")
 	public ModelAndView homeView() {
 		LOG.info("/ -> " + ViewNames.HomeGeneral.HOME);
-		ModelAndView mav = new ModelAndView(ViewNames.HomeGeneral.HOME);
+		ModelAndView mav = new ModelAndView(ViewNames.HomeGeneral.HOME);		
 		
 		Calendar cal= Calendar.getInstance();
 		cal.add(Calendar.MONTH, 1);
@@ -46,8 +46,8 @@ public class HomeController {
 		LOG.info("#CONSULTAR LAS home NOTICIAS DE LA FECHA:" + cal.toString());
 		List<NoticiaDTO> nList = noticiaService.findTop2NoticiasHome(cal.getTime());
 		LOG.info("#ENVIANDO LAS NOTICIAS A LA VIEW");
-		//mav.addObject("noticias", nList);	
-		mav.addObject("msg", "mi curso");
+		mav.addObject("noticias", nList);	
+		
 		return mav;
 	}
 	

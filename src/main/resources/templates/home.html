@@ -182,33 +182,21 @@
 				<!--COMPLETED ACTIONS DONUTS CHART-->
 				<h3 th:text="#{home.title.noticias}">Noticias</h3>
 
-				<!-- First Action -->
-				<div class="desc">
+				<!-- NOTICIAS BEGIN -->
+				<div class="desc" th:each="n : ${noticias}">
 					<div class="thumb">
 						<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
 					</div>
 					<div class="details">
 						<p>
-							<muted >2 Minutes Ago</muted>
-							<br /> <a href="#" th:text="${msg}">Nuevo curso implementado</a> <br /><span>Se habre
-							un nuevo curso de computación</span><br />
+							<muted th:text="${n.fechaVigenciaInicio}">2 Minutes Ago</muted>
+							<br /> <a href="#" th:text="${n.titulo}">Nuevo curso implementado</a> 
+							<br /> <span th:text="${n.contenidoCorto}">Se habre un nuevo curso de computación</span><br />
 						</p>
 					</div>
 				</div>
-				<!-- Second Action 
-				<div class="desc">
-					<div class="thumb">
-						<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-					</div>
-					<div class="details">
-						<p>
-							<muted>3 Hours Ago</muted>
-							<br /> <a href="#">Suspención de Clases</a><br />Se suspenderan
-							clases el próximo jueves<br />
-						</p>
-					</div>
-				</div>-->
-				<!-- Mas Action -->
+				
+				<!-- MAS NOTICIAS DEFUALT -->
 				<div class="desc">					
 					<div class="details">
 						<p>							
@@ -216,6 +204,10 @@
 						</p>
 					</div>
 				</div>
+				
+				<!-- NOTICIAS END -->
+				
+				
 
 				<!-- USERS ONLINE SECTION -->
 				<h3 th:text="#{home.title.cursos}">Cursos</h3>

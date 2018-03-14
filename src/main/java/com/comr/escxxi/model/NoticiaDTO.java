@@ -73,6 +73,18 @@ public class NoticiaDTO {
 		this.fechaVigenciaInicio = fechaVigenciaInicio;
 	}
 
+	public String getContenidoCorto() {
+		if(this.contenido != null) {
+			if(this.contenido.length() > 50) {
+				return this.contenido.substring(0, 47) + "...";
+			}else {
+				return this.contenido;
+			}			
+		}else {
+			return this.contenido;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "NoticiaDTO [noticiaId=" + noticiaId + ", titulo=" + titulo + ", contenido=" + contenido + ", desactivo="
