@@ -122,10 +122,15 @@ public class Noticia implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Noticia [noticiaId=" + noticiaId + ", contenido=" + contenido + ", desactivo=" + desactivo
-				+ ", eliminado=" + eliminado + ", fechaModificacion=" + fechaModificacion + ", fechaVigenciaFin="
-				+ fechaVigenciaFin + ", fechaVigenciaInicio=" + fechaVigenciaInicio + ", titulo=" + titulo
-				+ ", usuario=" + usuario + "]";
+		return "Noticia [noticiaId=" + noticiaId +
+				", titulo=" + titulo +
+				", fechaVigenciaInicio=" + fechaVigenciaInicio +
+				", fechaVigenciaFin=" + fechaVigenciaFin + 
+				", contenido=" + contenido + 
+				", desactivo=" + desactivo + 
+				", eliminado=" + eliminado + 
+				", fechaModificacion=" + fechaModificacion + 								 				
+				 "]";
 	}
 
 	

@@ -69,6 +69,10 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
+	public Usuario(Integer id) {
+		this.usuarioId = id;
+	}
+	
 	public Integer getUsuarioId() {
 		return this.usuarioId;
 	}

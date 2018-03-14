@@ -1,7 +1,10 @@
 #modificar el banner para que no tome el default
 banner:
   location: classpath:banner-omr.txt # Banner file location.
-  
+
+debug: false # Enable debug logs.
+trace: false
+
 #para conecar con postgresql  
 spring:
   datasource:
