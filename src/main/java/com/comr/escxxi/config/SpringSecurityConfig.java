@@ -20,7 +20,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().disable().authorizeRequests()
-				.antMatchers("/", "/home", "/about","/img/**","/css/**","/js/**","/font-awesome/**").permitAll()
+				.antMatchers(
+						"/", "/home", "/about", "/noticias", //paginas permitidas a todos
+						"/img/**","/css/**","/js/**","/font-awesome/**" //recursos
+						).permitAll()
 				.antMatchers("/admin/**").hasAnyRole("ADMIN").antMatchers("/user/**").hasAnyRole("USER").anyRequest()
 				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and()
 				.exceptionHandling().accessDeniedHandler(accessDeniedHandler);

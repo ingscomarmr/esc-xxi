@@ -31,12 +31,13 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String indexView() {
+		LOG.info("/ -> redirect to " + ViewNames.HomeGeneral.HOME);
 		return "redirect:" + ViewNames.HomeGeneral.HOME;
 	}
 	
 	@GetMapping("/home")
 	public ModelAndView homeView() {
-		LOG.info("/ -> " + ViewNames.HomeGeneral.HOME);
+		LOG.info("/home -> " + ViewNames.HomeGeneral.HOME);
 		ModelAndView mav = new ModelAndView(ViewNames.HomeGeneral.HOME);		
 		
 		Calendar cal= Calendar.getInstance();

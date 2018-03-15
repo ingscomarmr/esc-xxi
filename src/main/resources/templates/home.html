@@ -5,23 +5,7 @@
 <title th:fragment="title_page" th:text="#{home.page.title}">Home</title>
 </head>
 <body>
-
-
-	<!-- ######## TO MENU PAGE BEGIN ######## -->
-	<div id="siderbar-containt-menu" th:fragment="menu_content">
-		<li class="mt"><a class="active" href="index.html"> <i
-				class="fa fa-home"></i> <span th:text="#{home.menu.home}">Home</span>
-		</a></li>
-
-		<li class="mt"><a href="#" th:href="@{/registro}"> <i class="fa fa-users"></i> <span th:text="#{home.menu.registro}">Registro</span>
-		</a></li>
-
-		<li class="mt"><a href="#" th:href="@{/login}"> <i class="fa fa-book"></i> <span th:text="#{home.menu.login}">Login</span>
-		</a></li>
-	</div>
-	<!-- ######## TO MENU PAGE END ######## -->
-	
-	
+		
 	<!-- $$$$$$$$$$$$$$$$ TO CONTENT PAGE BEGIN $$$$$$$$$$$$$$$$ -->
 	<section class="wrapper" th:fragment="content">
 		<div class="row">
@@ -200,7 +184,7 @@
 				<div class="desc">					
 					<div class="details">
 						<p>							
-							<br /> <a href="#" th:text="#{home.noticias.mas}">M&aacute;s noticias...</a>
+							<br /> <a href="#" th:href="@{/noticias}" th:text="#{home.noticias.mas}">M&aacute;s noticias...</a>
 						</p>
 					</div>
 				</div>

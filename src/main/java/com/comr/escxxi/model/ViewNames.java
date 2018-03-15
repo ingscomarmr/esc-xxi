@@ -4,6 +4,7 @@ public class ViewNames {
 	public class HomeGeneral{
 		public static final String HOME="home";
 		public static final String LOGIN="login";
+		public static final String NOTICIAS="noticias";
 	}
 	
 	public class Teacher{
