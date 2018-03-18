@@ -1,0 +1,18 @@
+<!-- FRAGEMENT MENU HOME -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<!-- ######## TO MENU PAGE BEGIN ######## -->
+	<div id="siderbar-containt-menu" th:fragment="menu-fragment">
+		<!-- MENU TEACHER -->
+		<!-- agregar id=menu + title pagina sin espacios -->
+		<li class="mt"><a id="menu-teacher" class=""
+			href="#" th:href="@{/home}" > <i class="fa fa-home"></i> <span
+				th:text="#{home.menu.home}">Home</span>
+		</a></li>					
+	</div>
+
+</body>
+
+</html>

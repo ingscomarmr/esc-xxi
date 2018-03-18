@@ -7,4 +7,5 @@ import com.comr.escxxi.model.NoticiaDTO;
 
 public interface NoticiaService {
 	public abstract List<NoticiaDTO> findTop2NoticiasHome(Date fecha);
+	public abstract List<NoticiaDTO> findAllNoticias();	
 }

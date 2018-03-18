@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:include="/teacher/layout_teacher :: page">
 <head>
-<meta charset="UTF-8"/>
-<title>Welcome to teacher home</title>
+<title th:fragment="title_page">Teacher</title>
 </head>
 <body>
-	<h1>Welcome to teacher home</h1>
-	<br/>
-	<a href="#" th:href="@{/login?logout}">Salir</a>
+
+	<!-- TO CONTENT PAGE -->
+	<section class="wrapper" th:fragment="content">
+		<div class="row">
+			<div>
+				<h1>TEACHER</h1>
+			</div>
+		</div>
+		<!--/row -->
+	</section>
+	
 </body>
 </html>

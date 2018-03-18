@@ -3,36 +3,78 @@
 	xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
 <head>
 <title th:fragment="title_page">Noticias</title>
+
+
+
 </head>
 <body>
 
 	<!-- TO CONTENT PAGE -->
 	<section class="wrapper" th:fragment="content">
+
+
 		<div class="row">
-						
-			<br/><br/>			
+
+			<br /> <br />
 			<div class="col-md-12 col-sm-12 mb">
 				<!-- REVENUE PANEL -->
 				<div class="darkblue-panel pn">
 					<div class="darkblue-header">
 						<h5>Valores</h5>
 					</div>
-					<p class="mt" style="text-align: justify;">
-						<b>Los valores y la educación están ligados, y son escenciales
-							para el cumplimiento de la misión y visión de la Secretaría de
-							Educación, establecer de manera interna y externa el compromiso
-							de todos los actores del sector educativo de conocerlos,
-							difundirlos, apropiarse de ellos, asumirlos y llevarlos a la
-							praxis en el quehacer diario dentro y fuera de las instituciones
-							educativas.</b>
-					</p>
+					<div>
+
+						<table id="grid-data"
+							class="table table-condensed table-hover table-striped">
+							<thead>
+								<tr>
+									<th data-column-id="id" data-type="numeric">ID</th>
+									<th data-column-id="sender">Sender</th>
+									<th data-column-id="received" data-order="desc">Received</th>
+									<th data-column-id="link" data-formatter="link"
+										data-sortable="false">Link</th>
+								</tr>
+							</thead>
+						</table>
+
+					</div>
 				</div>
 			</div>
-			
-			
+
+
 		</div>
-		
 		<!--/row -->
 	</section>
+
+	<section th:fragment="scripts_page">
+		<script th:src="@{/js/jquery.bootgrid.js}"></script>
+		<script type="application/javascript">									
+		//obtener titulo de pagina y activar menus
+        $(window).load(function() {
+        	try{
+        		$("#grid-data").bootgrid({
+        		    ajax: true,
+        		    post: function ()
+        		    {
+        		        /* To accumulate custom parameter with the request object */
+        		        return {
+        		            id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
+        		        };
+        		    },
+        		    url: "/api/data/basic",
+        		    formatters: {
+        		        "link": function(column, row)
+        		        {
+        		            return "";
+        		        }
+        		    }
+        		});        		
+        	}catch(ex){
+        		alert('Error activando menus:' + ex);
+        	}        	
+        });    				
+		</script>
+	</section>
+
 </body>
 </html>
