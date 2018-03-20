@@ -16,8 +16,7 @@ public class NoticiasController {
 	@GetMapping("/noticias")
 	public ModelAndView getNoticias() {
 		LOG.info("/noticias -> " + ViewNames.HomeGeneral.NOTICIAS);
-		ModelAndView mav=new ModelAndView(ViewNames.HomeGeneral.NOTICIAS);
-		
+		ModelAndView mav=new ModelAndView(ViewNames.HomeGeneral.NOTICIAS);						
 		return mav;
 	}
 

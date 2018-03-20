@@ -18,26 +18,27 @@
 			<br /> <br />
 			<div class="col-md-12 col-sm-12 mb">
 				<!-- REVENUE PANEL -->
-				<div class="darkblue-panel pn">
+				<div class="darkblue-panel pn" style="height: auto;">
 					<div class="darkblue-header">
 						<h5>Valores</h5>
 					</div>
-					<div>
 
-						<table id="grid-data"
-							class="table table-condensed table-hover table-striped">
-							<thead>
-								<tr>
-									<th data-column-id="id" data-type="numeric">ID</th>
-									<th data-column-id="sender">Sender</th>
-									<th data-column-id="received" data-order="desc">Received</th>
-									<th data-column-id="link" data-formatter="link"
-										data-sortable="false">Link</th>
-								</tr>
-							</thead>
-						</table>
+					<table id="grid-data"
+						class="table table-condensed table-hover table-striped">
+						<thead>
+							<tr>
+								<th data-column-id="noticiaId" data-type="numeric"
+									data-identifier="true">ID</th>
+								<th data-column-id="titulo">Titulo</th>
+								<th data-column-id="contenidoCorto">Contenido</th>
+								<th data-column-id="fechaVigenciaInicio" data-order="desc">Fecha
+									inicio</th>
+								<th data-column-id="fechaVigenciaFin">Fecha Fin</th>
+							</tr>
+						</thead>
+					</table>
 
-					</div>
+
 				</div>
 			</div>
 
@@ -48,9 +49,13 @@
 
 	<section th:fragment="scripts_page">
 		<script th:src="@{/js/jquery.bootgrid.js}"></script>
-		<script type="application/javascript">									
+		<script th:src="@{/js/jquery.bootgrid.fa.js}"></script>
+
+		<script type="application/javascript">
+															
 		//obtener titulo de pagina y activar menus
         $(window).load(function() {
+        	//alert('corriendo la tabla grid');
         	try{
         		$("#grid-data").bootgrid({
         		    ajax: true,
@@ -61,7 +66,7 @@
         		            id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
         		        };
         		    },
-        		    url: "/api/data/basic",
+        		    url: "/getnoticias",
         		    formatters: {
         		        "link": function(column, row)
         		        {
@@ -73,6 +78,8 @@
         		alert('Error activando menus:' + ex);
         	}        	
         });    				
+		
+		
 		</script>
 	</section>
 
