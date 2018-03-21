@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
+<head>
+<title th:fragment="title_page" th:text="#{noticia.titulo}">Noticia</title>
+
+
+
+</head>
+<body>
+
+	<!-- TO CONTENT PAGE -->
+	<section class="wrapper" th:fragment="content">
+		
+		<div class="row">
+			<br /> <br />
+			<div class="col-md-2 col-sm-2 mb">
+			</div>			
+			<div class="col-md-8 col-sm-8 mb">
+				<!-- REVENUE PANEL -->
+				<div class="darkblue-panel pn" style="height: auto;">
+				
+					<div class="darkblue-header">
+						<h5 th:text="#{noticia.titulo}">Noticia</h5>
+					</div>
+					<form action="#" role="form" th:object="${n}">
+						<div class="form-group">
+							<label for="titulo" th:text="#{noticia.form.titulo}">Titulo</label> 
+							<input type="text" class="form-control" readonly="readonly" th:value="*{titulo}" />
+						</div>
+						<div class="form-group">
+							<label th:text="#{noticia.form.fecha.inicio}">Fecha de Inicio</label> 
+							<input type="date" class="form-control" readonly="readonly" th:value="*{fechaVigenciaInicio}" />							
+						</div>
+						<div class="form-group">
+							<label th:text="#{noticia.form.fecha.fin}">Fecha Fin</label> 
+							<input type="date" class="form-control" readonly="readonly" th:value="*{fechaVigenciaInicio}" />							
+						</div>
+						<div class="form-group">
+							<label th:text="#{noticia.form.contenido}">Contenido</label> 
+							<textarea class="form-control" readonly="readonly" th:text="*{contenido}" ></textarea>
+						</div>
+					</form>
+					<br/>
+				</div>
+			</div>
+			
+			<div class="col-md-2 col-sm-2 mb">
+			</div>
+
+		</div>
+		<!--/row -->
+	</section>
+
+	<section th:fragment="scripts_page">
+		<!-- AGREGAR LOS SCRIPTS DE LA PAGINA EN ESTA SECCIÓN -->
+	</section>
+
+</body>
+</html>

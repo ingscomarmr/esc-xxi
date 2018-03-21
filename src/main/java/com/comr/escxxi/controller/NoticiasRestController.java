@@ -1,7 +1,5 @@
 package com.comr.escxxi.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.comr.escxxi.model.BootGridModel;
-import com.comr.escxxi.model.NoticiaDTO;
 import com.comr.escxxi.service.NoticiaService;
 
 @RestController

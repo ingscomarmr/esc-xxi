@@ -2,7 +2,7 @@ package com.comr.escxxi.model;
 
 import java.util.Date;
 
-public class NoticiaDTO {
+public class NoticiaModel {
 	private Integer noticiaId;
 	private String titulo;
 	private String contenido;
@@ -10,11 +10,11 @@ public class NoticiaDTO {
 	private Date fechaVigenciaFin;
 	private Date fechaVigenciaInicio;
 	
-	public NoticiaDTO() {
+	public NoticiaModel() {
 		
 	}
 	
-	public NoticiaDTO(Integer noticiaId, String titulo, String contenido, Integer desactivo, Date fechaVigenciaFin,
+	public NoticiaModel(Integer noticiaId, String titulo, String contenido, Integer desactivo, Date fechaVigenciaFin,
 			Date fechaVigenciaInicio) {
 		super();
 		this.noticiaId = noticiaId;
@@ -87,7 +87,7 @@ public class NoticiaDTO {
 	
 	@Override
 	public String toString() {
-		return "NoticiaDTO [noticiaId=" + noticiaId + ", titulo=" + titulo + ", contenido=" + contenido + ", desactivo="
+		return "NoticiaModel [noticiaId=" + noticiaId + ", titulo=" + titulo + ", contenido=" + contenido + ", desactivo="
 				+ desactivo + ", fechaVigenciaFin=" + fechaVigenciaFin + ", fechaVigenciaInicio=" + fechaVigenciaInicio
 				+ "]";
 	}

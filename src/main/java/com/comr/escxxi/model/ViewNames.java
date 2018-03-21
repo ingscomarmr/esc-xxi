@@ -5,6 +5,7 @@ public class ViewNames {
 		public static final String HOME="home";
 		public static final String LOGIN="login";
 		public static final String NOTICIAS="noticias";
+		public static final String VER_NOTICIAS="noticia";
 	}
 	
 	public class Teacher{

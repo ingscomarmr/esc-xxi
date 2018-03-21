@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.comr.escxxi.model.NoticiaDTO;
+import com.comr.escxxi.model.NoticiaModel;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,8 +37,8 @@ public class NoticiaServiceTest {
 		d.setTime(c.getTimeInMillis());
 		
 		LOG.info("#OBTENIENDO LAS DOS ULTIMAS NOTICIAS SEGUN LA FECHA");
-		List<NoticiaDTO> nList = noticiaService.findTop2NoticiasHome(d);
-		for (NoticiaDTO n : nList) {
+		List<NoticiaModel> nList = noticiaService.findTop2NoticiasHome(d);
+		for (NoticiaModel n : nList) {
 			LOG.info("#" + n.toString());
 		}
 		

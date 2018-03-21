@@ -13,46 +13,46 @@ import org.springframework.stereotype.Service;
 
 import com.comr.escxxi.entity.Noticia;
 import com.comr.escxxi.model.BootGridModel;
-import com.comr.escxxi.model.NoticiaDTO;
+import com.comr.escxxi.model.NoticiaModel;
 import com.comr.escxxi.repository.NoticiaJpaRepository;
 import com.comr.escxxi.repository.NoticiaQueryDSLRepository;
 import com.comr.escxxi.service.NoticiaService;
 import com.querydsl.core.QueryResults;
 
 @Service("noticiaService")
-public class NoticiaServiceImpl implements NoticiaService{
+public class NoticiaServiceImpl implements NoticiaService {
 
 	private static final Log LOG = LogFactory.getLog(NoticiaServiceImpl.class);
-	
+
 	@Autowired
 	@Qualifier("noticiaJpaRepository")
 	NoticiaJpaRepository noticiaJpaRepository;
-	
+
 	@Autowired
 	@Qualifier("noticiaQueryDSLRepository")
 	NoticiaQueryDSLRepository noticiaQueryDSLRepository;
-	
+
 	@Override
-	public List<NoticiaDTO> findTop2NoticiasHome(Date fecha) {
+	public List<NoticiaModel> findTop2NoticiasHome(Date fecha) {
 		LOG.info("#OBTENER LAS 2 ULTIMAS NOTICIAS SEGUN FECHA");
 		ModelMapper mm = new ModelMapper();
 		List<Noticia> nList = noticiaJpaRepository.findTop2ByFechaVigenciaFinLessThanOrderByFechaVigenciaFinDesc(fecha);
-		List<NoticiaDTO> ndList = new ArrayList<NoticiaDTO>();
+		List<NoticiaModel> ndList = new ArrayList<NoticiaModel>();
 		for (Noticia noticia : nList) {
-			NoticiaDTO nd = mm.map(noticia, NoticiaDTO.class);
+			NoticiaModel nd = mm.map(noticia, NoticiaModel.class);
 			ndList.add(nd);
 		}
 		return ndList;
 	}
 
 	@Override
-	public List<NoticiaDTO> findAllNoticias() {
+	public List<NoticiaModel> findAllNoticias() {
 		LOG.info("#BUSCAR TODAS LAS NOTICIAS");
 		List<Noticia> nList = noticiaJpaRepository.findAll();
-		List<NoticiaDTO> ndList = new ArrayList<NoticiaDTO>();
+		List<NoticiaModel> ndList = new ArrayList<NoticiaModel>();
 		ModelMapper mm = new ModelMapper();
 		for (Noticia noticia : nList) {
-			NoticiaDTO nd = mm.map(noticia, NoticiaDTO.class);
+			NoticiaModel nd = mm.map(noticia, NoticiaModel.class);
 			ndList.add(nd);
 		}
 		return ndList;
@@ -60,26 +60,39 @@ public class NoticiaServiceImpl implements NoticiaService{
 
 	@Override
 	public BootGridModel findByTituloLikeOrContenidoLikeOrderBy(String search, BootGridModel bGrid) {
-		
-		QueryResults<Noticia> nQuery = 
-				noticiaQueryDSLRepository.findByTituloLikeOrContenidoLikeOrderBy(search, 
-						bGrid.getCurrent(), 
-						bGrid.getRowCount());
-		
-		bGrid.setTotal(nQuery.getTotal());;
+
+		QueryResults<Noticia> nQuery = noticiaQueryDSLRepository.findByTituloLikeOrContenidoLikeOrderBy(search,
+				bGrid.getCurrent(), bGrid.getRowCount());
+
+		bGrid.setTotal(nQuery.getTotal());
+		;
 		ModelMapper mm = new ModelMapper();
-		
+
 		List<Noticia> nList = nQuery.getResults();
-		List<NoticiaDTO> nmList = new ArrayList<NoticiaDTO>();
+		List<NoticiaModel> nmList = new ArrayList<NoticiaModel>();
 		for (Noticia noticia : nList) {
-			NoticiaDTO ndo = mm.map(noticia, NoticiaDTO.class);
+			NoticiaModel ndo = mm.map(noticia, NoticiaModel.class);
 			nmList.add(ndo);
 		}
-		
+
 		bGrid.setRows(nmList);
 		return bGrid;
 	}
-	
-	
+
+	@Override
+	public NoticiaModel findNoticiaById(int id) {
+		LOG.info("#Buscando la niticia id:" + id);
+		NoticiaModel n = new NoticiaModel();
+
+		if (id > 0) {
+			Noticia noticia = noticiaJpaRepository.findByNoticiaId(id);			
+			if(noticia != null) {
+				LOG.info("#Noticia " + id + " encontrada " + noticia);
+				n = new ModelMapper().map(noticia, NoticiaModel.class);
+			}
+		}
+
+		return n;
+	}
 
 }

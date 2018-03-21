@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.comr.escxxi.entity.Noticia;
 import com.comr.escxxi.entity.QNoticia;
 import com.comr.escxxi.model.BootGridModel;
-import com.comr.escxxi.model.NoticiaDTO;
+import com.comr.escxxi.model.NoticiaModel;
 import com.comr.escxxi.utils.Utils;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
@@ -54,7 +54,7 @@ public class NoticiaQueryDSLRepository {
 				.select(qNoticia)
 				.from(qNoticia)
 				.where(bb)
-				.orderBy(qNoticia.noticiaId.asc()).offset(offset).limit(limit);		
+				.orderBy(qNoticia.fechaVigenciaInicio.desc()).offset(offset).limit(limit);		
 		
 		return noticiaQuery.fetchResults();
 	}

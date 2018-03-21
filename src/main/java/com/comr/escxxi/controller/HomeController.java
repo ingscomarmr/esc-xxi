@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.comr.escxxi.model.NoticiaDTO;
+import com.comr.escxxi.model.NoticiaModel;
 import com.comr.escxxi.model.ViewNames;
 import com.comr.escxxi.service.NoticiaService;
 
@@ -45,7 +45,7 @@ public class HomeController {
 		cal.set(Calendar.DATE, 1);
 		
 		LOG.info("#CONSULTAR LAS home NOTICIAS DE LA FECHA:" + cal.toString());
-		List<NoticiaDTO> nList = noticiaService.findTop2NoticiasHome(cal.getTime());
+		List<NoticiaModel> nList = noticiaService.findTop2NoticiasHome(cal.getTime());
 		LOG.info("#ENVIANDO LAS NOTICIAS A LA VIEW");
 		mav.addObject("noticias", nList);	
 		
