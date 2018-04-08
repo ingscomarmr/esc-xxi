@@ -3,7 +3,6 @@ package com.comr.escxxi.repository;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;

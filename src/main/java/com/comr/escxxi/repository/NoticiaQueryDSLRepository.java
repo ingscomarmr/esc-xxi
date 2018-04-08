@@ -1,20 +1,14 @@
 package com.comr.escxxi.repository;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
 import com.comr.escxxi.entity.Noticia;
 import com.comr.escxxi.entity.QNoticia;
-import com.comr.escxxi.model.BootGridModel;
-import com.comr.escxxi.model.NoticiaModel;
 import com.comr.escxxi.utils.Utils;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;

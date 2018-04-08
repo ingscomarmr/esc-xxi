@@ -10,7 +10,7 @@ import com.comr.escxxi.entity.Noticia;
 
 @Repository("noticiaJpaRepository")
 public interface NoticiaJpaRepository extends JpaRepository<Noticia, Serializable>{
-	public Noticia findByNoticiaId(int id);
+	public Noticia findByNoticiaId(Integer id);
 	//public List<Noticia> findAllOrderByFechaVigenciaFinDesc(); 
 	public List<Noticia> findByTituloLikeOrderByTitulo(String t);
 	public List<Noticia> findByFechaVigenciaInicioGreaterThanAndFechaVigenciaFinLessThan(Date fi, Date ff);

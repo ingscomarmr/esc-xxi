@@ -14,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.comr.escxxi.entity.Noticia;
-import com.comr.escxxi.model.BootGridModel;
 import com.querydsl.core.QueryResults;
 
 @RunWith(SpringRunner.class)
