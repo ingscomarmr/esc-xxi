@@ -1,26 +1,20 @@
-#modificar el banner para que no tome el default
-banner:
-  location: classpath:banner-omr.txt # Banner file location.
-
 debug: false # Enable debug logs.
 trace: false
 
 #para conecar con postgresql  
 spring:
+  banner:
+    location: classpath:banner-omr.txt # Banner file location.
   datasource:
     url: jdbc:postgresql://localhost:5432/sisescolar
     username: u_sisescolar
     password: comr040488
   jpa:    
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     hibernate:
-      ddl-auto: update
-      naming:
-        strategy: org.hibernate.cfg.ImprovedNamingStrategy
-      show-sql: true         
+      ddl-auto: update                          
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect   
-    
-       
- #thymeleaf
-
+        temp:
+          use_jdbc_metadata_defaults: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect                     

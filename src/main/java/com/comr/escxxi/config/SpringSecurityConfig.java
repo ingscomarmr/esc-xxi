@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
@@ -13,27 +15,42 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AccessDeniedHandler accessDeniedHandler;
 
-	// roles admin allow to access /admin/**
-	// roles user allow to access /user/**
-	// custom 403 access denied handler
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
+
+		/*
+		 * forma 2 UserBuilder user = User.withDefaultPasswordEncoder();
+		 * build.inMemoryAuthentication()
+		 * .withUser(user.username("admin").password("12345").roles(
+		 * "ADMIN,PROFESOR,ALUMNO,TUTOR"))
+		 * .withUser(user.username("profe").password("12345").roles("PROFESOR"))
+		 * .withUser(user.username("alumno").password("12345").roles("ALUMNO"))
+		 * .withUser(user.username("tutor").password("12345").roles("TUTOR"));
+		 */
+
+		build.inMemoryAuthentication().withUser("admin").password("12345").roles("ADMIN,PROFESOR,ALUMNO,TUTOR").and()
+				.withUser("profe").password("12345").roles("PROFESOR").and().withUser("alumno").password("12345")
+				.roles("ALUMNO").and().withUser("tutor").password("12345").roles("TUTOR");
+
+	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
-		http.csrf().disable().authorizeRequests()
-				.antMatchers(
-						"/", "/home", "/about", "/noticias", "/noticia/**", "/getnoticias", "/teacher/**",//paginas permitidas a todos
-						"/img/**","/css/**","/js/**","/font-awesome/**" //recursos
-						).permitAll()
-				.antMatchers("/admin/**").hasAnyRole("ADMIN").antMatchers("/user/**").hasAnyRole("USER").anyRequest()
-				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and()
-				.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+		
+		http.authorizeRequests().antMatchers("/", "/home", "/about", "/noticias", "/noticia/**", "/getnoticias", "/teacher/**",
+								"/img/**", "/css/**", "/js/**", "/font-awesome/**").permitAll()
+		.antMatchers("/teacher/**").hasAnyRole("ADMIN,PROFESOR")
+		.antMatchers("/alumn/**").hasAnyAuthority("ADMIN,ALUMNO")
+		.antMatchers("/advisor/**").hasAnyRole("ADMIN,TUTOR")
+		.anyRequest().authenticated();
+		
+		//primera forma
+		//http.csrf().disable().authorizeRequests()
+		//		.antMatchers("/", "/home", "/about", "/noticias", "/noticia/**", "/getnoticias", "/teacher/**",
+		//				"/img/**", "/css/**", "/js/**", "/font-awesome/**")
+		//		.permitAll().antMatchers("/admin/**").hasAnyRole("ADMIN").antMatchers("/user/**").hasAnyRole("USER")
+		//		.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
+		//		.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 	}
 
-	// create two users, admin and user
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER").and().withUser("admin")
-				.password("password").roles("ADMIN");
-	}
 }
