@@ -25,11 +25,11 @@ public class NoticiasRestController {
 			@RequestParam(name="current",required=false,defaultValue="1") int current,
 			@RequestParam(name="rowCount",required=false,defaultValue="10") int rowCount,
 			@RequestParam(name="searchPhrase",required=false,defaultValue="") String searchPhrase,
-			@RequestParam(name="sort",required=false,defaultValue="") String sort
+			@RequestParam(name="sort[]",required=false,defaultValue="") String[] sort
 			){
 		LOG.info("/getnoticias - >current:" + current + 
 				", rowCount:" + rowCount + rowCount + ", searchPhrase:" + searchPhrase 
-				+", sort:" + sort);
+				+", sort:" + ((sort != null && sort.length > 0)? sort.length : "0"));
 		//sort
 		BootGridModel grd = new BootGridModel();
 		try {

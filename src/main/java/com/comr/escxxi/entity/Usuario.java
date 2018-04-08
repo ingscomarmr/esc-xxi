@@ -50,15 +50,15 @@ public class Usuario implements Serializable {
 	private Integer usuarioIdMod;
 
 	//bi-directional many-to-one association to Curso
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
 	private List<Curso> cursos;
 
 	//bi-directional many-to-one association to Noticia
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
 	private List<Noticia> noticias;
 
 	//bi-directional many-to-one association to PermisoUsuario
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
 	private List<PermisoUsuario> permisoUsuarios;
 
 	//bi-directional many-to-one association to TipoUsuario
