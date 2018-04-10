@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
@@ -27,10 +29,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		 * .withUser(user.username("alumno").password("12345").roles("ALUMNO"))
 		 * .withUser(user.username("tutor").password("12345").roles("TUTOR"));
 		 */
-
-		build.inMemoryAuthentication().withUser("admin").password("12345").roles("ADMIN,PROFESOR,ALUMNO,TUTOR").and()
-				.withUser("profe").password("12345").roles("PROFESOR").and().withUser("alumno").password("12345")
-				.roles("ALUMNO").and().withUser("tutor").password("12345").roles("TUTOR");
+		
+		build.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
+				.withUser("admin").password("12345").roles("ADMIN","PROFESOR","ALUMNO","TUTOR").and()
+				.withUser("profe").password("12345").roles("PROFESOR").and()
+				.withUser("alumno").password("12345").roles("ALUMNO").and()
+				.withUser("tutor").password("12345").roles("TUTOR");
 
 	}
 
@@ -39,10 +43,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests().antMatchers("/", "/home", "/about", "/noticias", "/noticia/**", "/getnoticias", "/teacher/**",
 								"/img/**", "/css/**", "/js/**", "/font-awesome/**").permitAll()
-		.antMatchers("/teacher/**").hasAnyRole("ADMIN,PROFESOR")
-		.antMatchers("/alumn/**").hasAnyAuthority("ADMIN,ALUMNO")
-		.antMatchers("/advisor/**").hasAnyRole("ADMIN,TUTOR")
-		.anyRequest().authenticated();
+		.antMatchers("/teacher/**").hasAnyRole("ADMIN","PROFESOR")
+		.antMatchers("/alumno/**").hasAnyRole("ADMIN","ALUMNO")
+		.antMatchers("/advisor/**").hasAnyRole("ADMIN","TUTOR")
+		.anyRequest().authenticated()
+		.and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 		
 		//primera forma
 		//http.csrf().disable().authorizeRequests()

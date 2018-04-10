@@ -1,6 +1,7 @@
 <!-- FRAGEMENT MENU HOME -->
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <body>
 	<!-- ######## TO MENU PAGE BEGIN ######## -->
@@ -15,7 +16,7 @@
 				class="fa fa-bell"></i> <span th:text="#{noticias.menu.noticias}">Noticias</span>
 		</a></li>
 
-		<li class="mt"><a id="menu-login" href="#" th:href="@{/login}"> <i
+		<li class="mt" sec:authorize="!isAuthenticated()"><a id="menu-login" href="#" th:href="@{/login}"> <i
 				class="fa fa-book"></i> <span th:text="#{home.menu.login}">Login</span>
 		</a></li>				
 	</div>

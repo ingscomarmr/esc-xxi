@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" 
+	th:fragment="page">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
@@ -12,9 +14,10 @@
 <!-- TITULO DINAMICO LAYOUT-->
 <title th:include="this :: title_page">Layout</title>
 
-
+<!-- BOOSTRAP 3 -->
 <link href="assets/css/bootstrap.css" rel="stylesheet"
-	th:href="@{/css/bootstrap.css}" />
+	th:href="@{/css/bootstrap.css}" /> 
+
 <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"
 	th:href="@{/font-awesome/css/font-awesome.css}" />
 <link href="assets/css/zabuto_calendar.css" rel="stylesheet"
@@ -45,12 +48,18 @@
 			<a href="index.html" class="logo"><b th:text="#{app.profile}">Escuela</b></a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
-				
+
 			</div>
 			
 			<div class="top-menu" sec:authorize="isFullyAuthenticated()">
 				<ul class="nav pull-right top-menu">
-					<li><a class="logout" href="login.html" th:text="#{app.logout}">Logout</a></li>
+					<li>
+						<form action="#" id="frmLogout" th:action="@{/logout}" method="post">
+							<!-- <button type="submit" class="logout" >Logout</button>  --> 
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+						</form>
+						<a class="logout" onclick="document.getElementById('frmLogout').submit();" href="#" th:text="#{app.logout}">Logout</a>
+					</li>
 				</ul>
 			</div>
 		</header>
@@ -66,10 +75,10 @@
 				<ul class="sidebar-menu" id="nav-accordion">
 					<!-- BEGIN LOGO Y NOMBRE -->
 					<p class="centered">
-						<a href="profile.html"><img th:src="@{/img/ui-sam.jpg}"
+						<a href="profile.html"><img sec:authorize="isAuthenticated()" th:src="@{/img/ui-sam.jpg}"
 							class="img-circle" width="60" /></a>
 					</p>	
-					<h5 class="centered" th:text="#{app.profile}">Escuela Zona 1</h5>
+					<h5 class="centered" sec:authorize="isAuthenticated()" sec:authentication="name">Escuela Zona 1</h5>
 					<!-- END LOGO Y NOMBRE -->
 					
 					<div id="siderbar-containt-menu" th:include="menu :: menu-fragment" >
@@ -94,19 +103,25 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
 		<!--main content start-->		
-		<section id="main-content">			
+		<section id="main-content">
+												
 			<section class="wrapper" th:include="this :: content">
 			</section>
+
 		</section>
 		
 		<!--main content end-->
 		<!--footer start-->
 		<footer class="site-footer">
-			<div class="text-center" th:text="#{app.profile}">
-				Escuela Zona 1 
+			<div class="text-center" >
+				<span th:text="#{app.profile}">Escuela Zona 1</span> 
 				<a href="index.html#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
+				<span sec:authorize="isAuthenticated()">
+					Usuario: <span sec:authentication="name">Bob</span>	
+					,Roles:<span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+				</span> 			
 			</div>
 		</footer>
 		<!--footer end-->
@@ -115,7 +130,8 @@
 	<!-- js placed at the end of the document so the pages load faster -->
 	<script th:src="@{/js/jquery.js}" ></script>
 	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
-	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- BOOSTRAP 3 -->	
+	<script th:src="@{/js/bootstrap.min.js}"></script>		
 	<script th:src="@{/js/jquery.dcjqaccordion.2.7.js}" class="include"
 		type="text/javascript"></script>
 	<script th:src="@{/js/jquery.scrollTo.min.js}"></script>

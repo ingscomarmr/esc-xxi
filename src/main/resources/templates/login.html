@@ -2,19 +2,52 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
 <head>
-<title th:fragment="title_page">Login</title>
+<title th:fragment="title_page" th:text="#{login.titulo}">Login</title>
 </head>
 <body>
 
 	<!-- TO CONTENT PAGE -->
 	<section class="wrapper" th:fragment="content">
 		<div class="row">
-			<div>
-				<h1>LOGIN</h1>
+			<br /> <br />
+			<div class="col-md-3 col-sm-3 mb">
 			</div>
+			<div class="col-md-6 col-sm-6 mb">
+				
+				<!-- agregamos div de error para mensajes -->
+				<div class="alert alert-danger" role="alert" th:if="${not #strings.isEmpty(error)}" th:text="${error}"></div>
+				<!-- agregamos div de logout para mensajes -->
+				<div class="alert alert-success" role="alert" th:if="${not #strings.isEmpty(logout)}" th:text="${logout}"></div>
+				
+				<div class="darkblue-panel pn" style="height: auto;">
+					<div class="darkblue-header">
+						<h5 th:text="#{login.form.titulo.login}">Login</h5>
+					</div>
+					<form action="#" role="form" th:action="@{/login}" method="post">
+						<div class="form-group">							
+							<input type="text" class="form-control" name="username" id="username"
+								th:placeholder="#{login.fomr.usuario}" placeholder="usuario@email.com" required="required" autofocus="autofocus"/>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password" id="password"
+								th:placeholder="#{login.form.password}" placeholder="Contraseña" required="required"/>
+						</div>
+						
+						<div class="form-group">
+							<input type="submit" class="btn btn-lg btn-primary btn-block" th:value="#{login.form.boton.submit}" value="Login" />
+						</div>
+					</form>
+					<br />
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 mb">
+			</div>
+
 		</div>
 		<!--/row -->
 	</section>
-	
+	<section th:fragment="scripts_page">
+		<!-- ### SCRIPT BY PAGIN LOGIN -->
+	</section>
 </body>
 </html>
