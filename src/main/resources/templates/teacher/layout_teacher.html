@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" 
+	th:fragment="page">
 <head>
 
 <!-- LAYOUT TEACHER -->
@@ -53,7 +55,13 @@
 			
 			<div class="top-menu" sec:authorize="isFullyAuthenticated()">
 				<ul class="nav pull-right top-menu">
-					<li><a class="logout" href="login.html" th:text="#{app.logout}">Logout</a></li>
+					<li>
+						<form action="#" id="frmLogout" th:action="@{../logout}" method="post">
+							<!-- <button type="submit" class="logout" >Logout</button>  --> 
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+						</form>
+						<a class="logout" onclick="document.getElementById('frmLogout').submit();" href="#" th:text="#{app.logout}">Logout</a>
+					</li>
 				</ul>
 			</div>
 		</header>
@@ -69,10 +77,10 @@
 				<ul class="sidebar-menu" id="nav-accordion">
 					<!-- BEGIN LOGO Y NOMBRE -->
 					<p class="centered">
-						<a href="profile.html"><img th:src="@{/img/ui-sam.jpg}"
+						<a href="profile.html"><img sec:authorize="isAuthenticated()" th:src="@{/img/ui-sam.jpg}"
 							class="img-circle" width="60" /></a>
 					</p>	
-					<h5 class="centered" th:text="#{app.profile}">Escuela Zona 1</h5>
+					<h5 class="centered" sec:authorize="isAuthenticated()" sec:authentication="name">Escuela Zona 1</h5>
 					<!-- END LOGO Y NOMBRE -->
 					
 					<div id="siderbar-containt-menu" th:include="/teacher/menu_teacher :: menu-fragment" >

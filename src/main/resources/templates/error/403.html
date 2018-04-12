@@ -17,7 +17,7 @@
 	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
 	<!-- BOOSTRAP 3 -->	
 	<script th:src="@{/js/bootstrap.min.js}"></script>	
-	<title th:text="#{error404.title}">Error 404</title>
+	<title th:text="#{error.title}">Error 403</title>
 </head>
 <body>
 
@@ -28,21 +28,21 @@
 				<div class="col-md-3 col-sm-3 mb">
 				</div>
 				<div class="col-md-6 col-sm-6 mb">
-					<div class="panel panel-warning">
-						<div class="panel-heading" style="background-color: #ec971f;color: white;">
+					<div class="panel panel-danger">
+						<div class="panel-heading" style="background-color: #c9302c;color: white;">
 							<div class="panel-title" >
 								<i class="fa fa-exclamation-triangle"></i>
-								<strong th:text="#{error404.label.title}">Error 403</strong>
+								<strong th:text="#{error.label.title}">Error 403</strong>
 							</div>
 						</div>
-						<div class="panel-body bg-warning" >
-							<strong th:text="#{error404.label.textuser}">Estimad@</strong> <strong th:text="${#httpServletRequest.remoteUser}"></strong>
+						<div class="panel-body bg-danger" >
+							<strong th:text="#{error.label.textuser}">Estimad@</strong> <strong th:text="${#httpServletRequest.remoteUser}"></strong>
 							<br/>
 							<br/>
-							<p th:text="#{error404.label.message}">Esto es un error</p>
+							<p th:text="#{error.label.message}">Esto es un error</p>
 							<br/>
 							<br/>							
-							<a href="#" class="btn btn-warning" onclick="javascript:history.back();"><i class="fa fa-hand-o-left" aria-hidden="true"></i> <strong th:text="#{error404.btn.label}">Regresar</strong> </a>							
+							<a href="#" class="btn btn-danger" onclick="javascript:history.back();"><i class="fa fa-hand-o-left" aria-hidden="true"></i> <strong th:text="#{error.btn.label}">Regresar</strong> </a>							
 						</div>
 					</div>		
 					

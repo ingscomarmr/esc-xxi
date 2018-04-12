@@ -18,7 +18,20 @@
 
 		<li class="mt" sec:authorize="!isAuthenticated()"><a id="menu-login" href="#" th:href="@{/login}"> <i
 				class="fa fa-book"></i> <span th:text="#{home.menu.login}">Login</span>
-		</a></li>				
+		</a></li>
+		
+		<li class="mt" sec:authorize="hasRole('ROLE_PROFESOR')"><a id="menu-teacher" href="#" th:href="@{/teacher/}"> <i
+				class="fa fa-tachometer"></i> <span th:text="#{home.menu.teacher}">Tools teacher</span>
+		</a></li>
+		
+		<li class="mt" sec:authorize="hasRole('ROLE_ALUMNO')"><a id="menu-student" href="#" th:href="@{/student/}"> <i
+				class="fa fa-tachometer"></i> <span th:text="#{home.menu.student}">Tools student</span>
+		</a></li>
+		
+		<li class="mt" sec:authorize="hasRole('ROLE_TUTOR')"><a id="menu-advisor" href="#" th:href="@{/advisor/}"> <i
+				class="fa fa-tachometer"></i> <span th:text="#{home.menu.advisor}">Tools advisor</span>
+		</a></li>
+				
 	</div>
 
 </body>

@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" 
+	th:fragment="page">
 <head>
-<meta charset="UTF-8"/>
-<title>Internal server error</title>
+	<meta charset="UTF-8"/>
+	<!-- BOOSTRAP 3 -->
+	<link href="assets/css/bootstrap.css" rel="stylesheet"
+		th:href="@{/css/bootstrap.css}" /> 
+		
+	<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"
+	th:href="@{/font-awesome/css/font-awesome.css}" />
+	
+	<!-- js placed at the end of the document so the pages load faster -->
+	<script th:src="@{/js/jquery.js}" ></script>
+	<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+	<!-- BOOSTRAP 3 -->	
+	<script th:src="@{/js/bootstrap.min.js}"></script>	
+	<title th:text="#{error500.title}">Error 500</title>
 </head>
 <body>
-	<h1>Ocurr&iacute;o un problema en el servidor</h1>
-	<img alt="" src="" th:src="@{/img/500.png}"/>
+
+	<section id="main-content">												
+		<section class="wrapper">
+			<div class="row">
+				<br /> <br />
+				<div class="col-md-3 col-sm-3 mb">
+				</div>
+				<div class="col-md-6 col-sm-6 mb">
+					<div class="panel panel-danger">
+						<div class="panel-heading" style="background-color: #c9302c;color: white;">
+							<div class="panel-title" >
+								<i class="fa fa-exclamation-triangle"></i>
+								<strong th:text="#{error500.label.title}">Error 500</strong>
+							</div>
+						</div>
+						<div class="panel-body bg-danger" >
+							<strong th:text="#{error500.label.textuser}">Estimad@</strong> <strong th:text="${#httpServletRequest.remoteUser}"></strong>
+							<br/>
+							<br/>
+							<p th:text="#{error500.label.message}">Esto es un error</p>
+							<br/>
+							<br/>							
+							<a href="#" class="btn btn-danger" onclick="javascript:history.back();"><i class="fa fa-hand-o-left" aria-hidden="true"></i> <strong th:text="#{error500.btn.label}">Regresar</strong> </a>							
+						</div>
+					</div>		
+					
+				</div>
+				
+				<div class="col-md-3 col-sm-3 mb">
+				</div>
+			</div>
+			
+		</section>
+	</section>	
 </body>
 </html>
