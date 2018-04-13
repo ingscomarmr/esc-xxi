@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
+import com.comr.escxxi.model.Roles;
+
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -31,10 +33,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		 */
 		
 		build.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
-				.withUser("admin").password("12345").roles("ADMIN","PROFESOR","ALUMNO","TUTOR").and()
-				.withUser("profe").password("12345").roles("PROFESOR").and()
-				.withUser("alumno").password("12345").roles("ALUMNO").and()
-				.withUser("tutor").password("12345").roles("TUTOR");
+				.withUser("admin").password("12345").roles(Roles.ADMIN.toString(),Roles.TEACHER.toString(), Roles.STUDENT.toString(),Roles.ADVISOR.toString()).and()
+				.withUser("profe").password("12345").roles(Roles.TEACHER.toString()).and()
+				.withUser("alumno").password("12345").roles(Roles.STUDENT.toString()).and()
+				.withUser("tutor").password("12345").roles(Roles.ADVISOR.toString());
 
 	}
 
@@ -43,11 +45,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests().antMatchers("/", "/home", "/about", "/noticias", "/noticia/**", "/getnoticias", "/teacher/**",
 								"/img/**", "/css/**", "/js/**", "/font-awesome/**").permitAll()
-		.antMatchers("/teacher/**").hasAnyRole("ADMIN","PROFESOR")
-		.antMatchers("/alumno/**").hasAnyRole("ADMIN","ALUMNO")
-		.antMatchers("/advisor/**").hasAnyRole("ADMIN","TUTOR")
+		.antMatchers("/teacher/**").hasAnyRole(Roles.TEACHER.toString(),Roles.ADMIN.toString())
+		.antMatchers("/student/**").hasAnyRole(Roles.ADMIN.toString(),Roles.STUDENT.toString())
+		.antMatchers("/advisor/**").hasAnyRole(Roles.ADMIN.toString(),Roles.ADVISOR.toString())
 		.anyRequest().authenticated()
-		.and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
+		.and().formLogin()
+			.loginPage("/login")
+			.defaultSuccessUrl("/defaultForLogin/")
+		.permitAll().and().logout().permitAll();
 		
 		//primera forma
 		//http.csrf().disable().authorizeRequests()

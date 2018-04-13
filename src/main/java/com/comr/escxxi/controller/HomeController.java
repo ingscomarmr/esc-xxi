@@ -3,6 +3,8 @@ package com.comr.escxxi.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.comr.escxxi.model.NoticiaModel;
+import com.comr.escxxi.model.Roles;
 import com.comr.escxxi.model.ViewNames;
 import com.comr.escxxi.service.NoticiaService;
 
@@ -51,5 +54,21 @@ public class HomeController {
 		return mav;
 	}
 	
+	@GetMapping("/defaultForLogin")
+	public String defaultAfterLogin(HttpServletRequest request) {
+        LOG.info("#IN LOGIN :" + request.getRemoteUser());	
+       
+        //redirigiendo a la pagina que le corresponde
+		if (request.isUserInRole("ROLE_" + Roles.ADMIN)) {
+            return "redirect:/" + ViewNames.HomeGeneral.HOME;
+        }else if(request.isUserInRole("ROLE_" + Roles.TEACHER)) {
+        	return "redirect:/" + ViewNames.HomeGeneral.TEACHER;
+        }else if(request.isUserInRole("ROLE_" + Roles.STUDENT)) {
+        	return "redirect:/" + ViewNames.HomeGeneral.STUDENT;
+        }else if(request.isUserInRole("ROLE_" + Roles.ADVISOR)) {
+        	return "redirect:/" + ViewNames.HomeGeneral.ADVISOR;
+        }
+		return "redirect:/" + ViewNames.HomeGeneral.HOME;
+    }
 	
 }
