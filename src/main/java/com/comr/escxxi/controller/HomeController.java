@@ -1,6 +1,7 @@
 package com.comr.escxxi.controller;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,6 +56,13 @@ public class HomeController {
 		LOG.info("#ENVIANDO LAS NOTICIAS A LA VIEW");
 		mav.addObject("noticias", nList);	
 		
+		//obtener el usuario autentificado
+		Authentication aut = SecurityContextHolder.getContext().getAuthentication();
+		if(aut != null) {
+			mav.addObject("user_name_login", aut.getName());
+		}
+		
+		
 		return mav;
 	}
 	
@@ -71,4 +83,25 @@ public class HomeController {
 		return "redirect:/" + ViewNames.HomeGeneral.HOME;
     }
 	
+	//este metodo nos ayuda a saber si el usuario logeado tiene el rol
+	private boolean hasRole(Roles role) {
+		SecurityContext context = SecurityContextHolder.getContext();
+		
+		if(context == null) {
+			return false;
+		}
+		
+		Authentication aut = context.getAuthentication();
+		if(aut == null) {
+			return false;
+		}
+		
+		Collection<? extends GrantedAuthority> autohotities = aut.getAuthorities();
+		for(GrantedAuthority ga : autohotities) {
+			if(role.toString().equals(ga.getAuthority())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

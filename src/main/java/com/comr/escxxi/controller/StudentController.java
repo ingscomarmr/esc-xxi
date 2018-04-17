@@ -20,4 +20,5 @@ public class StudentController {
 		LOG.info("#/ -> NO DISPONIBLE AUN");
 		return ViewNames.Student.HOME;
 	}
+	
 }
