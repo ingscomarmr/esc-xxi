@@ -20,14 +20,15 @@ public class PermisoUsuario implements Serializable {
 	@Column(name="permiso_id")
 	private Integer permisoId;
 
+	private String role;
+	
 	private Integer desactivo;
 
 	private Integer eliminado;
 
 	@Column(name="fecha_modificacion")
 	private Timestamp fechaModificacion;
-
-	private String role;
+	
 
 	@Column(name="usuario_id_mod")
 	private Integer usuarioIdMod;

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import com.comr.escxxi.model.Roles;
+import com.comr.escxxi.service.impl.JpaUserDetailsService;
 
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,14 +24,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	BCryptPasswordEncoder passwordEnconder;
 	
 	@Autowired
+	JpaUserDetailsService jpaUserDetailsService;
+	
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
-				
+		
+		/* ya no sera necesario esta autentificación porque la pondremos desde base de datos
 		build.inMemoryAuthentication().passwordEncoder(passwordEnconder)
 				.withUser("admin").password(passwordEnconder.encode("admin")).roles(Roles.ADMIN.toString(),Roles.TEACHER.toString(), Roles.STUDENT.toString(),Roles.ADVISOR.toString()).and()
 				.withUser("profe").password(passwordEnconder.encode("12345")).roles(Roles.TEACHER.toString()).and()
 				.withUser("alumno").password(passwordEnconder.encode("12345")).roles(Roles.STUDENT.toString()).and()
 				.withUser("tutor").password(passwordEnconder.encode("12345")).roles(Roles.ADVISOR.toString());
 
+		*/
+		
+		build.userDetailsService(jpaUserDetailsService).passwordEncoder(passwordEnconder);
+		
 	}
 
 	@Override
