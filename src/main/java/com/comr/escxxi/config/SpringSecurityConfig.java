@@ -19,24 +19,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AccessDeniedHandler accessDeniedHandler;
 
+	@Autowired(required=true)
+	BCryptPasswordEncoder passwordEnconder;
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
-
-		/*
-		 * forma 2 UserBuilder user = User.withDefaultPasswordEncoder();
-		 * build.inMemoryAuthentication()
-		 * .withUser(user.username("admin").password("12345").roles(
-		 * "ADMIN,PROFESOR,ALUMNO,TUTOR"))
-		 * .withUser(user.username("profe").password("12345").roles("PROFESOR"))
-		 * .withUser(user.username("alumno").password("12345").roles("ALUMNO"))
-		 * .withUser(user.username("tutor").password("12345").roles("TUTOR"));
-		 */
-		
-		build.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
-				.withUser("admin").password("12345").roles(Roles.ADMIN.toString(),Roles.TEACHER.toString(), Roles.STUDENT.toString(),Roles.ADVISOR.toString()).and()
-				.withUser("profe").password("12345").roles(Roles.TEACHER.toString()).and()
-				.withUser("alumno").password("12345").roles(Roles.STUDENT.toString()).and()
-				.withUser("tutor").password("12345").roles(Roles.ADVISOR.toString());
+				
+		build.inMemoryAuthentication().passwordEncoder(passwordEnconder)
+				.withUser("admin").password(passwordEnconder.encode("admin")).roles(Roles.ADMIN.toString(),Roles.TEACHER.toString(), Roles.STUDENT.toString(),Roles.ADVISOR.toString()).and()
+				.withUser("profe").password(passwordEnconder.encode("12345")).roles(Roles.TEACHER.toString()).and()
+				.withUser("alumno").password(passwordEnconder.encode("12345")).roles(Roles.STUDENT.toString()).and()
+				.withUser("tutor").password(passwordEnconder.encode("12345")).roles(Roles.ADVISOR.toString());
 
 	}
 
@@ -53,14 +46,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			.loginPage("/login")
 			.defaultSuccessUrl("/defaultForLogin/")
 		.permitAll().and().logout().permitAll();
-		
-		//primera forma
-		//http.csrf().disable().authorizeRequests()
-		//		.antMatchers("/", "/home", "/about", "/noticias", "/noticia/**", "/getnoticias", "/teacher/**",
-		//				"/img/**", "/css/**", "/js/**", "/font-awesome/**")
-		//		.permitAll().antMatchers("/admin/**").hasAnyRole("ADMIN").antMatchers("/user/**").hasAnyRole("USER")
-		//		.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
-		//		.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+				
 	}
 
 }

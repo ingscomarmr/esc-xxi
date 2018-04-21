@@ -21,4 +21,5 @@ public class StudentController {
 		return ViewNames.Student.HOME;
 	}
 	
+	
 }
