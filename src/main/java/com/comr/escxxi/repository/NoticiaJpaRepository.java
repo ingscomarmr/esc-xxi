@@ -16,5 +16,5 @@ public interface NoticiaJpaRepository extends JpaRepository<Noticia, Serializabl
 	public List<Noticia> findByFechaVigenciaInicioGreaterThanAndFechaVigenciaFinLessThan(Date fi, Date ff);
 	public List<Noticia> findTop10ByTituloLikeOrderByNoticiaIdDesc(String t);	
 	public List<Noticia> findTop2ByFechaVigenciaFinLessThanOrderByFechaVigenciaFinDesc(Date fi);
-	
+	public List<Noticia> findByTituloLikeOrContenidoLikeOrderByFechaVigenciaInicio(String titulo, String contenido);
 }

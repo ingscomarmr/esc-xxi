@@ -3,6 +3,11 @@ trace: false
 
 #para conecar con postgresql  
 spring:
+  mvc:
+    contentnegotiation: # estos son para configurar la exportacion a pdf
+      favor-parameter: true
+      media-types:
+        pdf: application/pdf
   banner:
     location: classpath:banner-omr.txt # Banner file location.
   datasource:

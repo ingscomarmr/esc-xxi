@@ -78,7 +78,7 @@ public class NoticiaServiceImpl implements NoticiaService {
 		bGrid.setRows(nmList);
 		return bGrid;
 	}
-
+		
 	@Override
 	public NoticiaModel findNoticiaById(int id) {
 		LOG.info("#Buscando la niticia id:" + id);
@@ -95,4 +95,10 @@ public class NoticiaServiceImpl implements NoticiaService {
 		return n;
 	}
 
+	@Override
+	public List<Noticia> findByTituloLikeOrContenidoLikeOrderByFechaVigenciaInicio(String tituloContenido) {		
+		return noticiaJpaRepository.findByTituloLikeOrContenidoLikeOrderByFechaVigenciaInicio(tituloContenido, tituloContenido);
+	}
+
+	
 }
