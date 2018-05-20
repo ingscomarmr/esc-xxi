@@ -98,6 +98,14 @@
 			<version>1.0.5</version>
 		</dependency>
 
+		<!-- para exportar a Excel 2007 en adelante -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
