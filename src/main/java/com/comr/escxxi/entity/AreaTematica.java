@@ -2,6 +2,8 @@ package com.comr.escxxi.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class AreaTematica implements Serializable {
 	@Column(name="usuario_id_mod")
 	private Integer usuarioIdMod;
 
-	//bi-directional many-to-one association to Curso
+	//bi-directional many-to-one association to Curso	
 	@OneToMany(mappedBy="areaTematica")
 	private List<Curso> cursos;
 
@@ -77,7 +79,8 @@ public class AreaTematica implements Serializable {
 	public void setUsuarioIdMod(Integer usuarioIdMod) {
 		this.usuarioIdMod = usuarioIdMod;
 	}
-
+	
+	@XmlTransient
 	public List<Curso> getCursos() {
 		return this.cursos;
 	}

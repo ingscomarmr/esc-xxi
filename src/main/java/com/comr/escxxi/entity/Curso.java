@@ -2,6 +2,8 @@ package com.comr.escxxi.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.sql.Timestamp;
 
 
@@ -126,7 +128,8 @@ public class Curso implements Serializable {
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
-
+	
+	@XmlTransient
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

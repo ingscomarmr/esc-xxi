@@ -1,4 +1,4 @@
-package com.comr.escxxi.view;
+package com.comr.escxxi.view.pdf;
 
 
 import java.awt.Color;

@@ -2,6 +2,8 @@ package com.comr.escxxi.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -190,7 +192,7 @@ public class Usuario implements Serializable {
 
 		return curso;
 	}
-
+	@XmlTransient
 	public List<Noticia> getNoticias() {
 		return this.noticias;
 	}
@@ -212,7 +214,7 @@ public class Usuario implements Serializable {
 
 		return noticia;
 	}
-
+	@XmlTransient
 	public List<PermisoUsuario> getPermisoUsuarios() {
 		return this.permisoUsuarios;
 	}
@@ -234,7 +236,7 @@ public class Usuario implements Serializable {
 
 		return permisoUsuario;
 	}
-
+	@XmlTransient
 	public TipoUsuario getTipoUsuario() {
 		return this.tipoUsuario;
 	}

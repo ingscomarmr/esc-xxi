@@ -2,6 +2,8 @@ package com.comr.escxxi.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -77,7 +79,8 @@ public class Grupo implements Serializable {
 	public void setUsuarioIdMod(Integer usuarioIdMod) {
 		this.usuarioIdMod = usuarioIdMod;
 	}
-
+	
+	@XmlTransient
 	public List<Curso> getCursos() {
 		return this.cursos;
 	}
