@@ -8,7 +8,7 @@ spring:
       favor-parameter: true
       media-types:
         pdf: application/pdf
-        xlsx: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        xlsx: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet        
   banner:
     location: classpath:banner-omr.txt # Banner file location.
   datasource:
