@@ -1,4 +1,4 @@
-package com.comr.escxxi.controller;
+package com.comr.escxxi.controller.api;
 
 
 import org.apache.commons.logging.Log;
@@ -13,6 +13,7 @@ import com.comr.escxxi.model.BootGridModel;
 import com.comr.escxxi.service.NoticiaService;
 
 @RestController
+@RequestMapping("/api/noticia")
 public class NoticiasRestController {
 	private static Log LOG = LogFactory.getLog(NoticiasRestController.class);
 	
@@ -20,7 +21,7 @@ public class NoticiasRestController {
 	@Qualifier("noticiaService")
 	NoticiaService noticiaService;
 	
-	@RequestMapping("/getnoticias")
+	@RequestMapping("/get-grid-noticias")
 	public BootGridModel getNoticias(
 			@RequestParam(name="current",required=false,defaultValue="1") int current,
 			@RequestParam(name="rowCount",required=false,defaultValue="10") int rowCount,

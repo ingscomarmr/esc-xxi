@@ -15,7 +15,7 @@ $(window).load(function() {
 					id : "b0df282a-0d67-40e5-8558-c9e93b7befed"
 				};
 			},
-			url : "/getnoticias",
+			url : "/api/noticia/get-grid-noticias",
 			formatters : {
 				"titulo" : function(column, row) {
 					var action = "\\noticia\\" + row.noticiaId;

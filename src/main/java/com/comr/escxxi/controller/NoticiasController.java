@@ -1,7 +1,5 @@
 package com.comr.escxxi.controller;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +7,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.comr.escxxi.model.NoticiaModel;
 import com.comr.escxxi.model.ViewNames;
 import com.comr.escxxi.service.NoticiaService;
-import com.comr.escxxi.view.xml.NoticiasXmlRoot;
+//import com.comr.escxxi.view.xml.NoticiasXmlRoot;
 
 @Controller
 public class NoticiasController {
@@ -34,6 +31,7 @@ public class NoticiasController {
 	}
 	
 	//imitar un restcontroller que responda con xml(default) y json segun el deseo del formato que queremos
+	/*
 	@GetMapping("/noticias-rest")
 	public @ResponseBody NoticiasXmlRoot getNoticiasRest() {
 		LOG.info("/noticias -> noticias-rest");
@@ -41,7 +39,7 @@ public class NoticiasController {
 		//para probar hacemos lo siguiente noticias-rest?form=json
 		return new NoticiasXmlRoot(noticiaService.findAllNoticias());
 		
-	}
+	}*/
 	
 	@GetMapping("/noticia/{noticiaId}")
 	public ModelAndView getNoticia(@PathVariable(name="noticiaId",required=true) int noticiaId) {

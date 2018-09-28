@@ -16,7 +16,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 	
 	//para exportar a xml
-	@Bean
+	/*@Bean
 	public Jaxb2Marshaller jaxb2Marshaller() {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
 		
@@ -25,5 +25,5 @@ public class MvcConfig implements WebMvcConfigurer {
 		
 		marshaller.setClassesToBeBound(classToXmlMap);
 		return marshaller;
-	}
+	}*/
 }
